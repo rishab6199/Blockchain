@@ -1,0 +1,58 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2638
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red79\green123\blue61;\red172\green172\blue193;\red70\green137\blue204;
+\red167\green197\blue152;\red212\green212\blue212;\red45\green175\blue118;\red237\green114\blue173;\red13\green102\blue149;
+\red31\green133\blue64;\red14\green86\blue166;}
+{\*\expandedcolortbl;;\cssrgb\c37647\c54510\c30588;\cssrgb\c72941\c73333\c80000;\cssrgb\c33725\c61176\c83922;
+\cssrgb\c70980\c80784\c65882;\cssrgb\c86275\c86275\c86275;\cssrgb\c19608\c72941\c53725;\cssrgb\c95294\c54118\c73333;\cssrgb\c0\c47843\c65098;
+\cssrgb\c12941\c58039\c31765;\cssrgb\c3137\c42353\c70980;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs24 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 // SPDX-License-Identifier: GPL-3.0\cf3 \strokec3 \
+\
+ \cf4 \strokec4 pragma\cf3 \strokec3  \cf4 \strokec4 solidity\cf3 \strokec3  \cf5 \strokec5 0.6.6\cf6 \strokec6 ;\cf3 \strokec3  \
+   \
+  \cf4 \strokec4 contract\cf3 \strokec3  HelloWorld_Bank\cf6 \strokec6 \{\cf3 \strokec3 \
+    \cf4 \strokec4 address\cf3 \strokec3  \cf7 \strokec7 public\cf3 \strokec3  owner\cf6 \strokec6 ;\cf3 \strokec3 \
+    \cf4 \strokec4 mapping\cf3 \strokec3  \cf6 \strokec6 (\cf4 \strokec4 address\cf3 \strokec3  => \cf4 \strokec4 uint\cf6 \strokec6 )\cf3 \strokec3  \cf7 \strokec7 private\cf3 \strokec3  balances\cf6 \strokec6 ;\cf3 \strokec3 \
+    \
+    \cf8 \strokec8 constructor\cf3 \strokec3  \cf6 \strokec6 ()\cf3 \strokec3  \cf7 \strokec7 public\cf3 \strokec3  \cf7 \strokec7 payable\cf3 \strokec3  \cf6 \strokec6 \{\cf3 \strokec3 \
+      owner \cf6 \strokec6 =\cf3 \strokec3  \cf9 \strokec9 msg\cf6 \strokec6 .\cf3 \strokec3 sender\cf6 \strokec6 ;\cf3 \strokec3  \
+     \cf6 \strokec6 \}\cf3 \strokec3 \
+    \
+\cf2 \strokec2 //Setting Up authorization\cf3 \strokec3 \
+ \cf4 \strokec4 function\cf3 \strokec3  isOwner \cf6 \strokec6 ()\cf3 \strokec3  \cf7 \strokec7 public\cf3 \strokec3  \cf7 \strokec7 view\cf3 \strokec3  \cf10 \strokec10 returns\cf6 \strokec6 (\cf4 \strokec4 bool\cf6 \strokec6 )\cf3 \strokec3  \cf6 \strokec6 \{\cf3 \strokec3 \
+   \cf10 \strokec10 return\cf3 \strokec3  \cf9 \strokec9 msg\cf6 \strokec6 .\cf3 \strokec3 sender \cf6 \strokec6 ==\cf3 \strokec3  owner\cf6 \strokec6 ;\cf3 \strokec3 \
+  \cf6 \strokec6 \}\cf3 \strokec3 \
+ \
+ \cf4 \strokec4 modifier\cf3 \strokec3  onlyOwner\cf6 \strokec6 ()\cf3 \strokec3  \cf6 \strokec6 \{\cf3 \strokec3 \
+   \cf9 \strokec9 require\cf6 \strokec6 (\cf3 \strokec3 isOwner\cf6 \strokec6 ());\cf3 \strokec3 \
+   _\cf6 \strokec6 ;\cf3 \strokec3 \
+ \cf6 \strokec6 \}\cf3 \strokec3 \
+  \
+ \cf4 \strokec4 function\cf3 \strokec3  deposit \cf6 \strokec6 ()\cf3 \strokec3  \cf7 \strokec7 public\cf3 \strokec3  \cf7 \strokec7 payable\cf3 \strokec3  \cf6 \strokec6 \{\cf3 \strokec3 \
+  \cf9 \strokec9 require\cf6 \strokec6 ((\cf3 \strokec3 balances\cf6 \strokec6 [\cf9 \strokec9 msg\cf6 \strokec6 .\cf3 \strokec3 sender\cf6 \strokec6 ]\cf3 \strokec3  \cf6 \strokec6 +\cf3 \strokec3  \cf9 \strokec9 msg\cf6 \strokec6 .\cf3 \strokec3 value\cf6 \strokec6 )\cf3 \strokec3  \cf6 \strokec6 >=\cf3 \strokec3  balances\cf6 \strokec6 [\cf9 \strokec9 msg\cf6 \strokec6 .\cf3 \strokec3 sender\cf6 \strokec6 ]);\cf3 \strokec3 \
+  balances\cf6 \strokec6 [\cf9 \strokec9 msg\cf6 \strokec6 .\cf3 \strokec3 sender\cf6 \strokec6 ]\cf3 \strokec3  \cf6 \strokec6 +=\cf3 \strokec3  \cf9 \strokec9 msg\cf6 \strokec6 .\cf3 \strokec3 value\cf6 \strokec6 ;\cf3 \strokec3 \
+ \cf6 \strokec6 \}\cf3 \strokec3 \
+ \
+ \cf4 \strokec4 function\cf3 \strokec3  withdraw \cf6 \strokec6 (\cf4 \strokec4 uint\cf3 \strokec3  withdrawAmount\cf6 \strokec6 )\cf3 \strokec3  \cf7 \strokec7 public\cf3 \strokec3  \cf6 \strokec6 \{\cf3 \strokec3 \
+    \cf9 \strokec9 require\cf3 \strokec3  \cf6 \strokec6 (\cf3 \strokec3 withdrawAmount \cf6 \strokec6 <=\cf3 \strokec3  balances\cf6 \strokec6 [\cf9 \strokec9 msg\cf6 \strokec6 .\cf3 \strokec3 sender\cf6 \strokec6 ]);\cf3 \strokec3 \
+        \
+    balances\cf6 \strokec6 [\cf9 \strokec9 msg\cf6 \strokec6 .\cf3 \strokec3 sender\cf6 \strokec6 ]\cf3 \strokec3  \cf6 \strokec6 -=\cf3 \strokec3  withdrawAmount\cf6 \strokec6 ;\cf3 \strokec3 \
+    \cf9 \strokec9 msg\cf6 \strokec6 .\cf3 \strokec3 sender\cf6 \strokec6 .\cf3 \strokec3 transfer\cf6 \strokec6 (\cf3 \strokec3 withdrawAmount\cf6 \strokec6 );\cf3 \strokec3 \
+ \cf6 \strokec6 \}\cf3 \strokec3 \
+  \
+  \
+ \cf4 \strokec4 function\cf3 \strokec3  withdrawAll\cf6 \strokec6 ()\cf3 \strokec3  \cf7 \strokec7 public\cf3 \strokec3  onlyOwner \cf6 \strokec6 \{\cf3 \strokec3 \
+    \cf9 \strokec9 msg\cf6 \strokec6 .\cf3 \strokec3 sender\cf6 \strokec6 .\cf3 \strokec3 transfer\cf6 \strokec6 (\cf4 \strokec4 address\cf6 \strokec6 (\cf11 \strokec11 this\cf6 \strokec6 ).\cf3 \strokec3 balance\cf6 \strokec6 );\cf3 \strokec3 \
+ \cf6 \strokec6 \}\cf3 \strokec3 \
+ \
+ \cf4 \strokec4 function\cf3 \strokec3  getBalance \cf6 \strokec6 ()\cf3 \strokec3  \cf7 \strokec7 public\cf3 \strokec3  \cf7 \strokec7 view\cf3 \strokec3  \cf10 \strokec10 returns\cf3 \strokec3  \cf6 \strokec6 (\cf4 \strokec4 uint\cf6 \strokec6 )\{\cf3 \strokec3 \
+    \cf10 \strokec10 return\cf3 \strokec3  balances\cf6 \strokec6 [\cf9 \strokec9 msg\cf6 \strokec6 .\cf3 \strokec3 sender\cf6 \strokec6 ];\cf3 \strokec3 \
+\pard\pardeftab720\partightenfactor0
+\cf6 \strokec6 \}\cf3 \strokec3 \
+\cf6 \strokec6 \}\cf3 \strokec3 \
+}
